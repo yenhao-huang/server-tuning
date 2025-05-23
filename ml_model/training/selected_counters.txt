@@ -1,0 +1,103 @@
+Cache\Async Copy Reads/sec
+Cache\Async Data Maps/sec
+Cache\Async Fast Reads/sec
+Cache\Async MDL Reads/sec
+Cache\Async Pin Reads/sec
+Cache\Copy Read Hits %
+Cache\Data Flush Pages/sec
+Cache\Data Flushes/sec
+Cache\Data Map Hits %
+Cache\Data Map Pins/sec
+Cache\Dirty Page Threshold
+Cache\Dirty Pages
+Cache\Fast Read Not Possibles/sec
+Cache\Fast Read Resource Misses/sec
+Cache\Lazy Write Flushes/sec
+Cache\Lazy Write Pages/sec
+Cache\MDL Read Hits %
+Cache\Pin Read Hits %
+Cache\Read Aheads/sec
+Cache\Sync Copy Reads/sec
+Cache\Sync Data Maps/sec
+Cache\Sync Fast Reads/sec
+Cache\Sync MDL Reads/sec
+Cache\Sync Pin Reads/sec
+LogicalDisk(D:)\% Disk Read Time
+LogicalDisk(D:)\% Disk Write Time
+LogicalDisk(D:)\Avg. Disk Bytes/Read
+LogicalDisk(D:)\Avg. Disk Bytes/Write
+LogicalDisk(D:)\Avg. Disk Read Queue Length
+LogicalDisk(D:)\Avg. Disk Write Queue Length
+LogicalDisk(D:)\Avg. Disk sec/Read
+LogicalDisk(D:)\Avg. Disk sec/Write
+LogicalDisk(D:)\Current Disk Queue Length
+LogicalDisk(D:)\Disk Read Bytes/sec
+LogicalDisk(D:)\Disk Reads/sec
+LogicalDisk(D:)\Disk Write Bytes/sec
+LogicalDisk(D:)\Disk Writes/sec
+LogicalDisk(D:)\Split IO/Sec
+Memory\% Committed Bytes In Use
+Memory\Available Bytes
+Memory\Cache Bytes
+Memory\Cache Faults/sec
+Memory\Committed Bytes
+Memory\Demand Zero Faults/sec
+Memory\Free & Zero Page List Bytes
+Memory\Free System Page Table Entries
+Memory\Long-Term Average Standby Cache Lifetime (s)
+Memory\Modified Page List Bytes
+Memory\Page Faults/sec
+Memory\Page Reads/sec
+Memory\Page Writes/sec
+Memory\Pages Input/sec
+Memory\Pages Output/sec
+Memory\Pool Nonpaged Allocs
+Memory\Pool Nonpaged Bytes
+Memory\Pool Paged Allocs
+Memory\Pool Paged Bytes
+Memory\Pool Paged Resident Bytes
+Memory\Standby Cache Core Bytes
+Memory\Standby Cache Normal Priority Bytes
+Memory\Standby Cache Reserve Bytes
+Memory\Transition Faults/sec
+Memory\Transition Pages RePurposed/sec
+Memory\Write Copies/sec
+Paging File(\??\C:\pagefile.sys)\% Usage
+PhysicalDisk(1 D:)\% Disk Read Time
+PhysicalDisk(1 D:)\% Disk Write Time
+PhysicalDisk(1 D:)\Avg. Disk Bytes/Read
+PhysicalDisk(1 D:)\Avg. Disk Bytes/Write
+PhysicalDisk(1 D:)\Avg. Disk Read Queue Length
+PhysicalDisk(1 D:)\Avg. Disk Write Queue Length
+PhysicalDisk(1 D:)\Avg. Disk sec/Read
+PhysicalDisk(1 D:)\Avg. Disk sec/Write
+PhysicalDisk(1 D:)\Current Disk Queue Length
+PhysicalDisk(1 D:)\Disk Read Bytes/sec
+PhysicalDisk(1 D:)\Disk Reads/sec
+PhysicalDisk(1 D:)\Disk Write Bytes/sec
+PhysicalDisk(1 D:)\Disk Writes/sec
+PhysicalDisk(1 D:)\Split IO/Sec
+Process(app)\% Privileged Time
+Process(app)\% User Time
+Process(app)\IO Other Bytes/sec
+Process(app)\IO Other Operations/sec
+Process(app)\IO Read Bytes/sec
+Process(app)\IO Read Operations/sec
+Process(app)\IO Write Bytes/sec
+Process(app)\IO Write Operations/sec
+Process(app)\Page Faults/sec
+Process(app)\Page File Bytes
+Process(app)\Pool Nonpaged Bytes
+Process(app)\Pool Paged Bytes
+Process(app)\Private Bytes
+Process(app)\Virtual Bytes
+Process(app)\Working Set
+Process(app)\Working Set - Private
+System\Exception Dispatches/sec
+System\File Control Bytes/sec
+System\File Control Operations/sec
+System\File Read Bytes/sec
+System\File Read Operations/sec
+System\File Write Bytes/sec
+System\File Write Operations/sec
+System\Processor Queue Length
