@@ -2,70 +2,80 @@
 
 ## Goal
 
-This project aims to identify optimal system configurations to accelerate server performance. However, the challenge lies in the high diversity of tasks and the vast number of possible configuration combinations, making this problem complex and costly to solve through brute-force exploration.
+This project aims to identify **optimal system configurations** to accelerate server performance. The main challenge stems from the **diversity of workloads** and the **combinatorial explosion of configuration options**, making brute-force exploration both time-consuming and costly.
 
 ---
 
 ## Observations
 
-* Different tasks may require the same configuration settings.
-   
-E.g., both video downloading and backup tasks require similar configuration settings.
+* **Different tasks may share similar configuration needs**
 
---- 
+  *Example:* Both **video downloading** and **backup** tasks benefit from similar I/O tuning strategies.
+
+---
+
 ## Approach
 
-1. **Classify Tasks**  
-   Use performance counters to identify and classify the I/O pattern of each task.
+1. **Classify Tasks**
+   Use performance counters to identify and categorize the I/O patterns of different tasks.
 
-2. **Tune System Settings Based on Classification**  
-   For each I/O pattern class, apply tailored configuration adjustments known to be effective for that type.
+2. **Tune System Settings Based on Classification**
+   Apply pre-validated configuration templates for each I/O pattern class.
 
 ---
 
-## Environment Setting
-- **Server**: HPE ProLiant DL380 Gen10 Plus  
-- **CPU**: 2 × Intel Xeon Gold 5317  
-- **DRAM**: 4 × 32 GB DDR4  
-- **System**: Windows Server 2022 Datacenter  
-- **Storage**: 3 × 6.4 TB NVMe SSDs  
+## Environment Settings
+
+* **Server**: HPE ProLiant DL380 Gen10 Plus
+* **CPU**: 2 × Intel Xeon Gold 5317
+* **DRAM**: 4 × 32 GB DDR4
+* **System**: Windows Server 2022 Datacenter
+* **Storage**: 3 × 6.4 TB NVMe SSDs
+
+---
 
 ## ML Pipeline
-### 1. Collecting Data
 
-Performance data was collected by running a workload over time while recording system metrics using a profiling tool.
+### 1. Data Collection
 
-- **Raw Output Shape**: `(61, 103)` → 61 time intervals × 103 performance counters  
-- **Performance Counter Types**:
-  - **Cache** (e.g., Copy Reads/sec) – file system cache, not CPU cache
-  - **Memory** (e.g., Available Bytes, Page Faults/sec, Transition Pages RePurposed)
-  - **Logical Disk (D:/)** (e.g., Disk Transfers/sec)
-  - **Physical Disk** (e.g., Disk Transfers/sec)  
-    *Note: Physical disk data is identical to logical disk due to RAID controller abstraction.*
-  - **Process** (e.g., Processor Time, Thread Count)
+Performance data was gathered by running representative workloads while profiling system metrics.
+
+* **Raw Shape**: `(61, 103)`
+
+  * 61 time intervals × 103 performance counters
+
+* **Performance Counter Categories**:
+
+  * **Cache** (e.g., Copy Reads/sec) — file system cache
+  * **Memory** (e.g., Available Bytes, Page Faults/sec)
+  * **Logical Disk (D:)** (e.g., Disk Transfers/sec)
+  * **Physical Disk** — identical to logical disk due to RAID abstraction
+  * **Process** (e.g., Processor Time, Thread Count)
 
 ---
 
-### 2. Preprocessing Data
+### 2. Data Preprocessing
 
-- **Missing Values**: Filled with 0  
-- **Feature Selection**: Irrelevant features removed using CART  
-  - Feature count reduced: `156 → 103`
+* **Missing Values**: Replaced with 0
+* **Feature Selection**: Performed using CART
+
+  * Dimensionality reduced: **156 → 103**
+
 ---
 
 ### 3. Model Training
 
-* **Loss Function**: `CrossEntropyLoss`
-* **Optimizer**: `Adam`
+* **Model Type**: Fully-connected DNN
 * **Input Shape**: `(batch_size, 61, 103)`
-* **#Classes**: `6`
-* **Model Type**: DNN
-* **#Parameters**: **\~14 M**
-* **Model Size**: **53.36 MB**
+* **#Classes**: 6
+* **Loss**: `CrossEntropyLoss`
+* **Optimizer**: `Adam`
+* **#Parameters**: \~14M
+* **Model Size**: 53.36 MB
 
 #### 🔧 Architecture
 
-```=py
+```py
 ----------------------------------------------------------------
         Layer (type)               Output Shape         Param #
 ================================================================
@@ -80,30 +90,32 @@ Performance data was collected by running a workload over time while recording s
 ================================================================
 ```
 
-### 4. Optimization: Rejecting
+---
 
-**Issue:**
+### 4. Optimization – Rejection Handling
 
-10% of unseen tasks cannot be correctly classified.
+**Problem:**
+10% of unseen workloads are misclassified due to insufficient representation in the training data.
 
-**Method:**
+**Solution:**
+Incorporate **OpenMax** to detect and reject extreme or out-of-distribution inputs.
 
-Apply OpenMax to reject extreme inputs and avoid incorrect predictions.
+**Implementation:**
 
-**Approach:**
+1. **During training**: Capture penultimate-layer activation vectors and fit a **Weibull distribution** for each class.
+2. **During testing**: If the activation vector is far from all class centers (beyond a modeled threshold), reject the sample.
 
-1. During training, use the activation vectors from the penultimate layer of the classifier to fit a Weibull distribution for each known class.
+![OpenMax](images/openmax.png)
 
-2. During testing, if the activation vector of an input is far from all class centers (i.e., the distance exceeds the modeled distribution), the input is considered an extreme value and is rejected.
+---
 
-![alt text](images/openmax.png)
+### 5. Model Evaluation
 
-### 5. Model Testing
-Metrics:
+* **Accuracy Definition**:
 
-$$
-\text{Accuracy} = \frac{\text{Number of Correct Predictions}}{\text{Total Number of Samples}}
-$$
+  $$
+  \text{Accuracy} = \frac{\text{Correct Predictions}}{\text{Total Samples}}
+  $$
 
 | Task Type | Accuracy |
 | --------- | -------- |
@@ -111,10 +123,16 @@ $$
 | CNN       | 0.94     |
 | NLP       | 0.88     |
 
-### 5. Options Tuning
-Based on the predicted class, corresponding options are applied to improve performance.
+---
 
+### 6. Options Tuning
+
+Based on the predicted class, the system automatically applies the corresponding configuration to enhance performance.
+
+---
 
 ## Results
-The proposed method improves task performance by an average of 1.43× across tested workloads.
-![alt text](images/image.png)
+
+The proposed method achieves an **average performance gain of 1.43×** across tested workloads.
+
+![Performance Gain](images/image.png)
