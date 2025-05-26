@@ -6,7 +6,7 @@ This project aims to identify **optimal system configurations** to accelerate se
 
 ---
 
-## Observations
+## Observation
 
 * **Different tasks may share similar configuration needs**
 
@@ -16,11 +16,9 @@ This project aims to identify **optimal system configurations** to accelerate se
 
 ## Approach
 
-1. **Classify Tasks**
-   Use performance counters to identify and categorize the I/O patterns of different tasks.
+1. **Classify Tasks**: Use performance counters to identify and categorize the I/O patterns of different tasks.
 
-2. **Tune System Settings Based on Classification**
-   Apply pre-validated configuration templates for each I/O pattern class.
+2. **Tune System Settings Based on Classification**: Apply pre-validated configuration templates for each I/O pattern class.
 
 ---
 
@@ -110,6 +108,9 @@ Incorporate **OpenMax** to detect and reject extreme or out-of-distribution inpu
 ---
 
 ### 5. Model Evaluation
+* **#Training Samples**: 5,000
+  * **Split**: 4,550 (train) / 506 (validation)
+* **#Testing Samples**: 575
 
 * **Accuracy Definition**:
 
@@ -117,15 +118,37 @@ Incorporate **OpenMax** to detect and reject extreme or out-of-distribution inpu
   \text{Accuracy} = \frac{\text{Correct Predictions}}{\text{Total Samples}}
   $$
 
-| Task Type | Accuracy |
-| --------- | -------- |
-| DNN       | 0.97     |
-| CNN       | 0.94     |
-| NLP       | 0.88     |
+* **Accuracy**:
+<div align="center">
+
+<table>
+  <thead>
+    <tr>
+      <th>Task Type</th>
+      <th>Accuracy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>DNN</td>
+      <td>0.97</td>
+    </tr>
+    <tr>
+      <td>CNN</td>
+      <td>0.94</td>
+    </tr>
+    <tr>
+      <td>NLP</td>
+      <td>0.88</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
 
 ---
 
-### 6. Options Tuning
+## Options Tuning
 
 Based on the predicted class, the system automatically applies the corresponding configuration to enhance performance.
 
@@ -134,5 +157,3 @@ Based on the predicted class, the system automatically applies the corresponding
 ## Results
 
 The proposed method achieves an **average performance gain of 1.43×** across tested workloads.
-
-![Performance Gain](images/image.png)

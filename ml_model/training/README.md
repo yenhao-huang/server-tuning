@@ -1,5 +1,5 @@
 
-### 3. Model Training Summary
+## Model Training Summary
 
 * **Loss Function**: `CrossEntropyLoss`
 * **Optimizer**: `Adam`
@@ -58,7 +58,7 @@
 
 ---
 
-### 🧠 Model 3: RNN (LSTM)
+### Model 3: RNN (LSTM)
 
 * **Model Type**: 2-layer LSTM + Temporal Pooling
 * **#Parameters**: **\~244 K**
